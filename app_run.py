@@ -35,4 +35,4 @@ def postInput():
     return jsonify({'result': str(result)})
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
