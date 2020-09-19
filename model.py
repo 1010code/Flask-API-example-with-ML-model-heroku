@@ -2,8 +2,6 @@ import pickle
 import gzip
 import os
 
-PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
-# PROJECT_DIR = os.path.join(PROJECT_ROOT,'../../')
 PROJECT_DIR=''
 
 # 載入Model
