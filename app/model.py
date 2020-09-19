@@ -2,12 +2,13 @@ import pickle
 import gzip
 import xgboost as xgb
 
-PROJECT_DIR=''
+import pickle 
+print(pickle.format_version)
 # 載入Model
-with gzip.open(PROJECT_DIR+'app/model/xgb(classfication)-42-12000-scale-all.pgz', 'rb') as f:
-    print(xgb.__version__)
-    xgboostModel = pickle.load(f)
-    print(xgboostModel)
+# with gzip.open(PROJECT_DIR+'app/model/xgb(classfication)-42-12000-scale-all.pgz', 'rb') as f:
+#     print(xgb.__version__)
+#     xgboostModel = pickle.load(f)
+#     print(xgboostModel)
 
 def test():
     return "This is model.py"
