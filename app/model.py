@@ -1,10 +1,8 @@
 import pickle
 import gzip
 
-import pickle 
-print(pickle.format_version)
 # 載入Model
-with gzip.open('app/model/xgboost-iris.pgz', 'rb') as f:
+with gzip.open('app/model/xgboost-iris.pgz', 'r') as f:
     xgboostModel = pickle.load(f)
     print(xgboostModel)
 
