@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 import app.model as model
 import numpy as np
 
