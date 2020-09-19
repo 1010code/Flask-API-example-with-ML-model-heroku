@@ -1,11 +1,9 @@
-
 from app import app
-
 
 @app.route('/')
 def index():
-    return 'hello  !'
+    return 'Flask API started'
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(port=5000, debug=True)
