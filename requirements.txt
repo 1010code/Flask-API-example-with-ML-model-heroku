@@ -3,4 +3,4 @@ Flask-Cors==3.0.8
 gunicorn
 numpy
 scikit-learn
-xgboost==1.2.0
+xgboost
