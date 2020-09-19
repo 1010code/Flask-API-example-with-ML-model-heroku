@@ -1,4 +1,4 @@
-import app.model as model
+# import app.model as model
 import numpy as np
 
 from flask import Flask, request, jsonify
