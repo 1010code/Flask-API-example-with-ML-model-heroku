@@ -11,7 +11,7 @@ CORS(app)
 
 @app.route('/')
 def index():
-    return 'hello !'
+    return 'hello  !'
 
 
 @app.route('/test', methods=['GET'])
