@@ -3,7 +3,6 @@ import gzip
 
 with gzip.open('app/model/xgboost-iris.pgz', 'r') as f:
     xgboostModel = pickle.load(f)
-    print(xgboostModel)
 
 def test():
     return "This is model.py"
