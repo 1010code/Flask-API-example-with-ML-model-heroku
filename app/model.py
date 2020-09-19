@@ -5,6 +5,7 @@ PROJECT_DIR=''
 # 載入Model
 with gzip.open(PROJECT_DIR+'app/model/xgboost-iris.pgz', 'rb') as f:
     xgboostModel = pickle.load(f)
+    print(xgboostModel)
     
 
 def test():
