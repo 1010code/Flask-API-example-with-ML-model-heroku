@@ -8,8 +8,6 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
-
-
 @app.route('/test', methods=['GET'])
 def getResult():
     input = np.array([[5.5, 2.4, 2.7, 1.]])
