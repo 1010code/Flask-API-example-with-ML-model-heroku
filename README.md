@@ -5,3 +5,12 @@
 ### Fork Project
 你可以直接 Fork 此專案到你自己的 GitHub 帳號中，並採用 Heroku 連動 GitHub 專案的方式部署此 API 範例。
 
+### Fork 專案到自己的 GitHub 帳號中
+
+![](https://i.imgur.com/FsjsXWZ.png)
+
+### 建立一個 Heroku 帳號並新增一個專案
+
+[傳送門](https://dashboard.heroku.com/apps)
+
+![](https://i.imgur.com/wQ4TMhU.png)
