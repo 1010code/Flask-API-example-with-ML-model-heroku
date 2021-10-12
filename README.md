@@ -7,10 +7,10 @@
 
 ### Fork 專案到自己的 GitHub 帳號中
 
-![](https://i.imgur.com/FsjsXWZ.png)
+![](https://i.imgur.com/CEURaEi.png)
 
 ### 建立一個 Heroku 帳號並新增一個專案
 
 [傳送門](https://dashboard.heroku.com/apps)
 
-![](https://i.imgur.com/wQ4TMhU.png)
+![](https://i.imgur.com/QYjg4JR.png)
