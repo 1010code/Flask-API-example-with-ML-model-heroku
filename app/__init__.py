@@ -7,7 +7,7 @@ app = Flask(__name__)
 CORS(app)
 
 @app.route('/basicInfo', methods=['GET'])
-def postForBasicInfo():
+def getForBasicInfo():
     # 取得前端傳過來的數值
     flag = 1
     result = {
@@ -39,6 +39,47 @@ def postForSymptoms():
 
 }     # LINE API 
     return jsonify(result)
+
+@app.route('/records', methods=['POST'])
+def postForRecords():
+    # 取得前端傳過來的數值
+    insertValues = request.get_json()
+    x1=insertValues['userID']
+    flag = 1
+    result = {
+    "result":
+    {
+        "flag":"1",
+        "id": "Ace",
+        "weight": "60",
+        "xray": "-",
+        "urineob": "-",
+        "bloodhb": "15",
+        "bloodrbc": "500",
+        "liversgot": "25",
+        "liversgpt": "30",
+        "hbeag": "-",
+        "bloodwbc": "5500",
+        "bloodplt": "30",
+        "bloodht": "45",
+        "hbsag": "-",
+        "urineglucose": "-",
+        "cholesterol": "150",
+        "bloodpressure": "73-124",
+        "urineprotein": "-",
+        "kidneycre": "0.7",
+        "hbsab": "-",
+        "kidneybun": "15"
+    }
+
+}     # LINE API 
+    return jsonify(result)
+
+@app.route('/forClinic', methods=['POST'])
+def postForClinic():
+    insertValues = request.get_json()
+    message=insertValues['forClinic']
+    return "OK"
 
 
 @app.route('/test', methods=['GET'])
