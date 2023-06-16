@@ -24,7 +24,7 @@ def postForBasicInfo():
     return jsonify(result)
 
 @app.route('/symptoms', methods=['POST'])
-def postForBasicInfo():
+def postForSymptoms():
     # 取得前端傳過來的數值
     insertValues = request.get_json()
     x1=insertValues['userID']
