@@ -9,9 +9,9 @@ CORS(app)
 @app.route('/test', methods=['GET'])
 def getResult():
 
-    result = {"id": "Ace","family history": "心臟病, 高血壓, 糖尿病","weight": "60","age": "22","height": "170"}
-
-    return jsonify(result)
+    #result = {"id": "Ace","family history": "心臟病, 高血壓, 糖尿病","weight": "60","age": "22","height": "170"}
+    result = 1
+    return jsonify(str(result))
 
 @app.route('/right', methods=['POST'])
 def postInput():
