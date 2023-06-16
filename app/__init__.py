@@ -31,4 +31,4 @@ def postInput():
     # 進行預測
     result = 2
     text = "我今天頭很痛" # LINE API 症狀
-    return jsonify({'result': str(result), 'text': str(text)})
+    return jsonify({'result': str(result)})
