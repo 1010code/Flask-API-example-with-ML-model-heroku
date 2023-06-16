@@ -75,7 +75,7 @@ def postForRecords():
             "urineprotein": "-",
             "kidneycre": "0.7",
             "hbsab": "-",
-            "kidneybun": "15"
+            "kidneybun": "15",
             "familyHistory": "心臟病, 高血壓, 糖尿病",
             "weight": "60",
             "age": "18",
@@ -85,11 +85,11 @@ def postForRecords():
     }     # LINE API 
     return jsonify(result)
 
-#@app.route('/nextStep', methods=['POST']) # test 從雅典娜回傳 json 檔
-#def postNextStep():
-#    insertValues = request.get_json()
-#    nextstep=insertValues['nextStep'] # 兩個方向的判斷
-#    return "OK"
+@app.route('/nextStep', methods=['POST']) # test 從雅典娜回傳 json 檔
+def postNextStep():
+    insertValues = request.get_json()
+    nextstep=insertValues['nextStep'] # 兩個方向的判斷
+    return "OK"
 
 
 
