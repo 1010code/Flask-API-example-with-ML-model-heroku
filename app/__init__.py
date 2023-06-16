@@ -13,11 +13,22 @@ def getResult():
 
     return jsonify(result)
 
-@app.route('/predict', methods=['POST'])
+@app.route('/right', methods=['POST'])
 def postInput():
     # 取得前端傳過來的數值
     insertValues = request.get_json()
     x1=insertValues['userID']
     # 進行預測
-    result = 4
-    return jsonify({'result': str(result)})
+    result = 1
+    text = "我今天頭很痛" # LINE API 症狀
+    return jsonify({'result': str(result), 'text': str(text)})
+
+@app.route('/wrong', methods=['POST'])
+def postInput():
+    # 取得前端傳過來的數值
+    insertValues = request.get_json()
+    x1=insertValues['userID']
+    # 進行預測
+    result = 2
+    text = "我今天頭很痛" # LINE API 症狀
+    return jsonify({'result': str(result), 'text': str(text)})
