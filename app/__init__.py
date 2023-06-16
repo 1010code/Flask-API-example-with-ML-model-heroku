@@ -6,7 +6,24 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
+@app.route('/basicInfo', methods=['POST'])
+def postForBasicInfo():
+    # 取得前端傳過來的數值
+    insertValues = request.get_json()
+    x1=insertValues['userID']
+    flag = 1
+    result = {
+    "flag":"1",
+    "result":
+    {
+        "familyHistory": "心臟病, 高血壓, 糖尿病",
+        "weight": "60",
+        "age": "22",
+        "height": "170"
+    }
 
+}     # LINE API 
+    return jsonify(result)
 
 
 @app.route('/test', methods=['GET'])
@@ -36,11 +53,11 @@ def getResult3():
     
     #['Ace': {"id": "Ace","family history": "心臟病, 高血壓, 糖尿病","weight": "60","age": "22","height": "170"}]
     result = {
-    "flag":1,    
+    "flag":"1",    
     "result": 
         {
             "id": "Ace",
-            "family history": "心臟病, 高血壓, 糖尿病",
+            "familyHistory": "心臟病, 高血壓, 糖尿病",
             "weight": "60",
             "age": "22",
             "height": "170"
