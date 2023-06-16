@@ -37,7 +37,7 @@ def getResult3():
     #['Ace': {"id": "Ace","family history": "心臟病, 高血壓, 糖尿病","weight": "60","age": "22","height": "170"}]
     result = {
     "flag":1,    
-    "result": [
+    "result": 
         {
             "id": "Ace",
             "family history": "心臟病, 高血壓, 糖尿病",
@@ -45,6 +45,6 @@ def getResult3():
             "age": "22",
             "height": "170"
         }
-    ]
+    
 }
     return jsonify(result)
