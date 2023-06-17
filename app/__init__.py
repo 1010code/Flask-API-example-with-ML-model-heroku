@@ -14,10 +14,11 @@ def getForBasicInfo():
     "result":
     {
         "flag":"1",
+        "id": "Ace",
         "familyHistory": "心臟病, 高血壓, 糖尿病",
         "weight": "60",
-        "age": "NONE",
-        "height": "NONE"
+        "age": "18",
+        "height": "180"
     }
 
 }     # LINE API 
@@ -40,47 +41,60 @@ def postForSymptoms():
 }     # LINE API 
     return jsonify(result)
 
-@app.route('/records', methods=['POST'])
+@app.route('/forClinic', methods=['POST']) # test 從雅典娜回傳 json 檔
+def postForClinic():
+    insertValues = request.get_json()
+    message=insertValues['forClinic']
+    return "OK"
+
+@app.route('/records', methods=['POST']) # 缺看診紀錄
 def postForRecords():
     # 取得前端傳過來的數值
     insertValues = request.get_json()
     x1=insertValues['userID']
     flag = 1
     result = {
-    "result":
-    {
-        "flag":"1",
-        "id": "Ace",
-        "weight": "60",
-        "xray": "-",
-        "urineob": "-",
-        "bloodhb": "15",
-        "bloodrbc": "500",
-        "liversgot": "25",
-        "liversgpt": "30",
-        "hbeag": "-",
-        "bloodwbc": "5500",
-        "bloodplt": "30",
-        "bloodht": "45",
-        "hbsag": "-",
-        "urineglucose": "-",
-        "cholesterol": "150",
-        "bloodpressure": "73-124",
-        "urineprotein": "-",
-        "kidneycre": "0.7",
-        "hbsab": "-",
-        "kidneybun": "15"
-    }
+        "result":
+        {
+            "flag":"1",
+            "id": "Ace",
+            "xray": "-",
+            "urineob": "-",
+            "bloodhb": "15",
+            "bloodrbc": "500",
+            "liversgot": "25",
+            "liversgpt": "30",
+            "hbeag": "-",
+            "bloodwbc": "5500",
+            "bloodplt": "30",
+            "bloodht": "45",
+            "hbsag": "-",
+            "urineglucose": "-",
+            "cholesterol": "150",
+            "bloodpressure": "73-124",
+            "urineprotein": "-",
+            "kidneycre": "0.7",
+            "hbsab": "-",
+            "kidneybun": "15",
+            "familyHistory": "心臟病, 高血壓, 糖尿病",
+           
+        }
 
-}     # LINE API 
+    }     # LINE API 
     return jsonify(result)
 
-@app.route('/forClinic', methods=['POST'])
-def postForClinic():
+@app.route('/nextStep', methods=['POST']) # test 從雅典娜回傳 json 檔
+def postNextStep():
     insertValues = request.get_json()
-    message=insertValues['forClinic']
+    nextstep=insertValues['nextStep'] # 兩個方向的判斷
     return "OK"
 
+
+
+
+
+
+####################### for early testing ###############################################
 
 @app.route('/test', methods=['GET'])
 def test():
