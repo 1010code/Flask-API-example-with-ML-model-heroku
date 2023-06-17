@@ -77,9 +77,7 @@ def postForRecords():
             "hbsab": "-",
             "kidneybun": "15",
             "familyHistory": "心臟病, 高血壓, 糖尿病",
-            "weight": "60",
-            "age": "18",
-            "height": "180"
+           
         }
 
     }     # LINE API 
