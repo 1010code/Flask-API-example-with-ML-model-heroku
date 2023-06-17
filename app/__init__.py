@@ -11,9 +11,10 @@ def getForBasicInfo():
     # 取得前端傳過來的數值
     flag = 1
     result = {
+    "flag":"1",
     "result":
     {
-        "flag":"1",
+        
         "id": "Ace",
         "familyHistory": "心臟病, 高血壓, 糖尿病",
         "weight": "60",
@@ -31,9 +32,10 @@ def postForSymptoms():
     x1=insertValues['userID']
     flag = 1
     result = {
+    "flag":"1",
     "result":
     {
-        "flag":"1",
+        
         "symptom":"我今天頭很痛"
         
     }
@@ -54,9 +56,9 @@ def postForRecords():
     x1=insertValues['userID']
     flag = 1
     result = {
+        "flag":"1",
         "result":
         {
-            "flag":"1",
             "id": "Ace",
             "xray": "-",
             "urineob": "-",
