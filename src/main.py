@@ -42,28 +42,25 @@ def get_for_flag():
 
 @app.get("/basicInfo")
 def get_for_basic_info():
-    global flagForBasicInfo
     userid = "Ace"
 
     # Prepare the data
     data = {'userid': userid}
 
-    # # Send a POST request
-    # response = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/accessbasic', data=data)
-    # # Extract data from the response
-    # if response.status_code == 200:
-    #     user_data = response.json()
-    # else:
-    #     user_data = {}
-
+    # Send a POST request
+    response = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/accessbasic', data=data)
+    # Extract data from the response
+    if response.status_code == 200:
+        user_data = response.json()
+    else:
+        user_data = {}
 
     # Prepare the final result
     result = {
-        "flag": "1",
-        # "result": user_data['result']
+        "flag": flagForBasicInfo,
+        "result": user_data
     }
     return jsonable_encoder(result)
-
 
 class SymptomsModel(BaseModel):
     userID: str
