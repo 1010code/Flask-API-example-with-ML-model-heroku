@@ -62,7 +62,7 @@ def get_for_basic_info():
         "flag": flagForBasicInfo,
         "result": user_data['result']
     }
-    return jsonable_encoder(user_data['result'])
+    return jsonable_encoder(result)
 
 
 class SymptomsModel(BaseModel):
