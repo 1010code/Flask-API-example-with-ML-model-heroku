@@ -70,7 +70,7 @@ class SymptomsModel(BaseModel):
 @app.post("/symptoms")
 def post_for_symptoms(symptoms: SymptomsModel):
     
-    userid = symptoms.userid
+    userid = symptoms.userID
 
     # Prepare the data
     data = {'userid': userid}
