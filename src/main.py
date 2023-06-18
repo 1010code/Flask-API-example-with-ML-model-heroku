@@ -78,7 +78,7 @@ def get_for_basic_info():
     }
     for i in range(5):
     # Send a POST request
-        response = requests.post(urlForChange, data=changeFlag)
+        response = requests.post(urlForChange, json=changeFlag)
         # Extract data from the response
         if response.status_code == 200:
             user_data = response.json()
@@ -86,7 +86,7 @@ def get_for_basic_info():
             user_data = {}
         time.sleep(0.2)
             
-    return jsonable_encoder(user_data)
+    return jsonable_encoder(result)
 
 class SymptomsModel(BaseModel):
     userID: str
