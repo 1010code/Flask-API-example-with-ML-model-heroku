@@ -3,7 +3,6 @@ from pydantic import BaseModel
 from typing import Optional
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
-import requests
 
 app = FastAPI()
 
@@ -41,7 +40,6 @@ def get_for_flag():
     })
 
 
-
 @app.get("/basicInfo")
 def get_for_basic_info():
     userid = "Ace"
@@ -62,7 +60,8 @@ def get_for_basic_info():
         "flag": flagForBasicInfo,
         "result": user_data
     }
-    return jsonable_encoder(result)
+    return jsonable_encoder(user_data)
+
 
 class SymptomsModel(BaseModel):
     userID: str
