@@ -1,9 +1,8 @@
-from fastapi import FastAPI, Form
+from fastapi import FastAPI
 from pydantic import BaseModel
 from typing import Optional
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
-import requests
 
 app = FastAPI()
 
@@ -43,10 +42,6 @@ def get_for_flag():
 
 @app.get("/basicInfo")
 def get_for_basic_info():
-    userid = "Ace"
-    url = 'https://us-central1-fortesting-c54ba.cloudfunctions.net/post/accessbasic'
-    data = {'userid': userid}
-    response = requests.post(url, data=data)
     return jsonable_encoder({
         "flag": flagForBasicInfo,
         "result": {
