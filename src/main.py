@@ -1,8 +1,9 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Form
 from pydantic import BaseModel
 from typing import Optional
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
+import requests
 
 app = FastAPI()
 
@@ -40,19 +41,33 @@ def get_for_flag():
     })
 
 
-@app.get("/basicInfo")
-def get_for_basic_info():
-    return jsonable_encoder({
-        "flag": flagForBasicInfo,
-        "result": {
-            "id": "Ace",
-            "familyHistory": "心臟病, 高血壓, 糖尿病",
-            "weight": "60",
-            "age": "18",
-            "height": "180"
-        }
-    })
+class Result(BaseModel):
+    id: str
+    familyHistory: str
+    weight: str
+    age: str
+    height: str
 
+class Response(BaseModel):
+    result: Result
+    flagForBasicInfo: bool
+
+@app.post("/get_basic_info", response_model=Response)
+async def get_basic_info(userid: str = Form(...)):
+    url = 'https://us-central1-fortesting-c54ba.cloudfunctions.net/post/accessbasic'
+    data = {'userid': userid}
+    response = requests.post(url, data=data)
+
+    if response.status_code != 200:
+        return {"detail": "Failed to fetch data from the database."}
+
+    response_data = response.json()
+
+    # Wrap the response data in a 'result' field and add the 'flagForBasicInfo' field.
+    # Here we just set flagForBasicInfo to True for the example, you might want to replace this with actual logic.
+    response_data = {"result": response_data, "flagForBasicInfo": True}
+
+    return response_data
 
 class SymptomsModel(BaseModel):
     userID: str
