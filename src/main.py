@@ -59,7 +59,7 @@ def get_for_basic_info():
 
     # Prepare the final result
     result = {
-        "flag": flagForBasicInfo,
+        "flag": "1",
         "result": user_data['result']
     }
     return jsonable_encoder(result)
