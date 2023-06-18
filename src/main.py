@@ -131,31 +131,26 @@ class RecordsModel(BaseModel):
 
 @app.post("/records")
 def post_for_records(records: RecordsModel):
-    return jsonable_encoder({
+    userid = records.userID
+
+    # Prepare the data
+    data = {'userid': userid}
+
+    # Send a POST request
+    response = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/accesstestinfo', data=data)
+    # Extract data from the response
+    if response.status_code == 200:
+        user_data = response.json()
+    else:
+        user_data = {}
+
+    # Prepare the final result
+    result = {
         "flag": flagForRecords,
-        "result": {
-            "id": "Ace",
-            "xray": "-",
-            "urineob": "-",
-            "bloodhb": "15",
-            "bloodrbc": "500",
-            "liversgot": "25",
-            "liversgpt": "30",
-            "hbeag": "-",
-            "bloodwbc": "5500",
-            "bloodplt": "30",
-            "bloodht": "45",
-            "hbsag": "-",
-            "urineglucose": "-",
-            "cholesterol": "150",
-            "bloodpressure": "73-124",
-            "urineprotein": "-",
-            "kidneycre": "0.7",
-            "hbsab": "-",
-            "kidneybun": "15",
-            "familyHistory": "心臟病, 高血壓, 糖尿病",
-        }
-    })
+        "result": user_data['result']
+    }
+
+    return jsonable_encoder(result)
 
 
 class NextStepModel(BaseModel):
