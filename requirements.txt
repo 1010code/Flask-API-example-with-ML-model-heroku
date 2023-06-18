@@ -1,4 +1,11 @@
-Flask
-Flask-Cors
+Click
+fastapi
 gunicorn
-numpy
+h11
+httptools
+pydantic
+starlette
+uvicorn
+uvloop
+websockets
+requests
