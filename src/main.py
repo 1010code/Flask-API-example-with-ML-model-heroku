@@ -53,6 +53,7 @@ def get_for_flag():
 def get_for_basic_info():
     userid = "Ace"
     flag = flagForBasicInfo
+
     # Prepare the data
     data = {'userid': userid}
 
@@ -96,6 +97,7 @@ class SymptomsModel(BaseModel):
 def post_for_symptoms(symptoms: SymptomsModel):
     
     userid = symptoms.userID
+    flag = flagForSymptoms
 
     # Prepare the data
     data = {'userid': userid}
@@ -110,10 +112,24 @@ def post_for_symptoms(symptoms: SymptomsModel):
 
     # Prepare the final result
     result = {
-        "flag": flagForSymptoms,
+        "flag": flag,
         "result": user_data['result']
     }
-
+    changeFlag = {
+        "flagForSymptoms": 0,
+        "flagForBasicInfo": flagForBasicInfo,
+        "flagForRecords": flagForRecords,
+        "flagForClinic": flagForClinic,
+    }
+    for i in range(5):
+    # Send a POST request
+        response = requests.post(urlForChange, json=changeFlag)
+        # Extract data from the response
+        if response.status_code == 200:
+            user_data = response.json()
+        else:
+            user_data = {}
+        time.sleep(0.2)
     return jsonable_encoder(result)
 
 
@@ -124,6 +140,7 @@ class ClinicModel(BaseModel):
 @app.post("/forClinic")
 def post_for_clinic(clinic: ClinicModel):
     userid = clinic.userID
+    flag = flagForClinic
 
     # Prepare the data
     data = {'userid': userid}
@@ -138,10 +155,24 @@ def post_for_clinic(clinic: ClinicModel):
 
     # Prepare the final result
     result = {
-        "flag": flagForClinic,
+        "flag": flag,
         "result": user_data['result']
     }
-
+    changeFlag = {
+        "flagForSymptoms": flagForSymptoms,
+        "flagForBasicInfo": flagForBasicInfo,
+        "flagForRecords": flagForRecords,
+        "flagForClinic": 0,
+    }
+    for i in range(5):
+    # Send a POST request
+        response = requests.post(urlForChange, json=changeFlag)
+        # Extract data from the response
+        if response.status_code == 200:
+            user_data = response.json()
+        else:
+            user_data = {}
+        time.sleep(0.2)
     return jsonable_encoder(result)
 
 
@@ -152,6 +183,7 @@ class RecordsModel(BaseModel):
 @app.post("/records")
 def post_for_records(records: RecordsModel):
     userid = records.userID
+    flag = flagForRecords
 
     # Prepare the data
     data = {'userid': userid}
@@ -166,10 +198,25 @@ def post_for_records(records: RecordsModel):
 
     # Prepare the final result
     result = {
-        "flag": flagForRecords,
+        "flag": flag,
         "result": user_data['result']
     }
-
+    changeFlag = {
+        "flagForSymptoms": flagForSymptoms,
+        "flagForBasicInfo": flagForBasicInfo,
+        "flagForRecords": 0,
+        "flagForClinic": flagForClinic,
+    }
+    for i in range(5):
+    # Send a POST request
+        response = requests.post(urlForChange, json=changeFlag)
+        # Extract data from the response
+        if response.status_code == 200:
+            user_data = response.json()
+        else:
+            user_data = {}
+        time.sleep(0.2)
+    
     return jsonable_encoder(result)
 
 
