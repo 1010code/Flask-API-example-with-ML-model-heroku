@@ -5,15 +5,41 @@ from flask_cors import CORS
 
 app = Flask(__name__)
 CORS(app)
+flagForSymptoms = 0
+flagForBasicInfo = 0
+flagForRecords = 0
+
+@app.route('/changeFlag', methods=['POST'])
+def postForChangeFlag():
+    global flagForSymptoms
+    global flagForBasicInfo
+    global flagForRecords
+
+    insertValues = request.get_json()
+    flagForSymptoms=insertValues['flagForSymptoms']
+    flagForBasicInfo=insertValues['flagForBasicInfo']
+    flagForRecords=insertValues['flagForRecords']
+
+    return "OK"
+
+@app.route('/getFlag', methods=['GET'])
+def getForFlag():
+   
+    result={
+        "flagForSymptoms": flagForSymptoms,
+        "flagForBasicInfo": flagForBasicInfo,
+        "flagForRecords": flagForRecords,
+    }
+
+    return jsonify(result)
 
 @app.route('/basicInfo', methods=['GET'])
 def getForBasicInfo():
-    # 取得前端傳過來的數值
-    flag = 1
     result = {
+    "flag":flagForBasicInfo,
     "result":
     {
-        "flag":"1",
+        
         "id": "Ace",
         "familyHistory": "心臟病, 高血壓, 糖尿病",
         "weight": "60",
@@ -31,9 +57,10 @@ def postForSymptoms():
     x1=insertValues['userID']
     flag = 1
     result = {
+    "flag":"1",
     "result":
     {
-        "flag":"1",
+        
         "symptom":"我今天頭很痛"
         
     }
@@ -54,9 +81,9 @@ def postForRecords():
     x1=insertValues['userID']
     flag = 1
     result = {
+        "flag":"1",
         "result":
         {
-            "flag":"1",
             "id": "Ace",
             "xray": "-",
             "urineob": "-",
