@@ -3,6 +3,7 @@ from pydantic import BaseModel
 from typing import Optional
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
+import requests
 
 app = FastAPI()
 
@@ -40,19 +41,28 @@ def get_for_flag():
     })
 
 
+
 @app.get("/basicInfo")
 def get_for_basic_info():
-    return jsonable_encoder({
-        "flag": flagForBasicInfo,
-        "result": {
-            "id": "Ace",
-            "familyHistory": "心臟病, 高血壓, 糖尿病",
-            "weight": "60",
-            "age": "18",
-            "height": "180"
-        }
-    })
+    userid = "Ace"
 
+    # Prepare the data
+    data = {'userid': userid}
+
+    # Send a POST request
+    response = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/accessbasic', data=data)
+    # Extract data from the response
+    if response.status_code == 200:
+        user_data = response.json()
+    else:
+        user_data = {}
+
+    # Prepare the final result
+    result = {
+        "flag": flagForBasicInfo,
+        "result": user_data
+    }
+    return jsonable_encoder(result)
 
 class SymptomsModel(BaseModel):
     userID: str
@@ -84,7 +94,7 @@ class RecordsModel(BaseModel):
 @app.post("/records")
 def post_for_records(records: RecordsModel):
     return jsonable_encoder({
-        "flag": "1",
+        "flag": flagForRecords,
         "result": {
             "id": "Ace",
             "xray": "-",
