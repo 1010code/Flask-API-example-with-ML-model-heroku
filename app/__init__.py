@@ -22,9 +22,11 @@ def postForChangeFlag():
 
     return "OK"
 
-@app.route('/getFlag', methods=['GET'])
-def getForFlag():
-   
+@app.route('/getFlag', methods=['POST'])
+def postForFlag():
+    
+    insertValues = request.get_json()
+    x1=insertValues['userID']
     result={
         "flagForSymptoms": flagForSymptoms,
         "flagForBasicInfo": flagForBasicInfo,
