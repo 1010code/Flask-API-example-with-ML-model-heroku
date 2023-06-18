@@ -22,6 +22,16 @@ def postForChangeFlag():
 
     return "OK"
 
+@app.route('/changeFlag', methods=['GET'])
+def postForChangeFlag():
+   
+    result={
+        "flagForSymptoms": flagForSymptoms,
+        "flagForBasicInfo": flagForBasicInfo,
+        "flagForRecords": flagForRecords,
+    }
+
+    return jsonify(result)
 
 @app.route('/basicInfo', methods=['GET'])
 def getForBasicInfo():
