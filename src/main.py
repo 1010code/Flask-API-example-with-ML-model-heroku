@@ -48,13 +48,13 @@ def get_for_basic_info():
     # Prepare the data
     data = {'userid': userid}
 
-    # Send a POST request
-    response = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/accessbasic', data=data)
-    # Extract data from the response
-    if response.status_code == 200:
-        user_data = response.json()
-    else:
-        user_data = {}
+    # # Send a POST request
+    # response = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/accessbasic', data=data)
+    # # Extract data from the response
+    # if response.status_code == 200:
+    #     user_data = response.json()
+    # else:
+    #     user_data = {}
 
 
     # Prepare the final result
