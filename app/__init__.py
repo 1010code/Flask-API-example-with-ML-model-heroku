@@ -22,8 +22,8 @@ def postForChangeFlag():
 
     return "OK"
 
-@app.route('/changeFlag', methods=['GET'])
-def postForChangeFlag():
+@app.route('/getFlag', methods=['GET'])
+def getForFlag():
    
     result={
         "flagForSymptoms": flagForSymptoms,
