@@ -4,6 +4,8 @@ from typing import Optional
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
 import requests
+import time
+
 app = FastAPI()
 
 # Global variables
@@ -11,6 +13,8 @@ flagForSymptoms: Optional[int] = 0
 flagForBasicInfo: Optional[int] = 0
 flagForRecords: Optional[int] = 0
 flagForClinic: Optional[int] = 0
+
+urlForChange= "https://for-api-32f276cf322d.herokuapp.com/changeFlag"
 
 class FlagModel(BaseModel):
     flagForSymptoms: int
@@ -48,7 +52,7 @@ def get_for_flag():
 @app.get("/basicInfo")
 def get_for_basic_info():
     userid = "Ace"
-
+    flag = flagForBasicInfo
     # Prepare the data
     data = {'userid': userid}
 
@@ -62,10 +66,26 @@ def get_for_basic_info():
 
     # Prepare the final result
     result = {
-        "flag": flagForBasicInfo,
+        "flag": flag,
         "userID":userid,
         "result": user_data['result']
     }
+    changeFlag = {
+        "flagForSymptoms": flagForSymptoms,
+        "flagForBasicInfo": 0,
+        "flagForRecords": flagForRecords,
+        "flagForClinic": flagForClinic,
+    }
+    for i in range(5):
+    # Send a POST request
+        response = requests.post(urlForChange, data=changeFlag)
+        # Extract data from the response
+        if response.status_code == 200:
+            user_data = response.json()
+        else:
+            user_data = {}
+        time.sleep(0.2)
+            
     return jsonable_encoder(result)
 
 class SymptomsModel(BaseModel):
