@@ -7,15 +7,15 @@ from fastapi.responses import JSONResponse
 app = FastAPI()
 
 # Global variables
-flagForSymptoms: Optional[bool] = None
-flagForBasicInfo: Optional[bool] = None
-flagForRecords: Optional[bool] = None
+flagForSymptoms: Optional[int] = None
+flagForBasicInfo: Optional[int] = None
+flagForRecords: Optional[int] = None
 
 
 class FlagModel(BaseModel):
-    flagForSymptoms: bool
-    flagForBasicInfo: bool
-    flagForRecords: bool
+    flagForSymptoms: int
+    flagForBasicInfo: int
+    flagForRecords: int
 
 
 @app.post("/changeFlag")
