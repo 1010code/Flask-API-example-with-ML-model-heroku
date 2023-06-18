@@ -10,12 +10,13 @@ app = FastAPI()
 flagForSymptoms: Optional[int] = 0
 flagForBasicInfo: Optional[int] = 0
 flagForRecords: Optional[int] = 0
-
+flagForClinic: Optional[int] = 0
 
 class FlagModel(BaseModel):
     flagForSymptoms: int
     flagForBasicInfo: int
     flagForRecords: int
+    flagForClinic: int
 
 
 @app.post("/changeFlag")
@@ -23,10 +24,12 @@ def post_for_change_flag(flag: FlagModel):
     global flagForSymptoms
     global flagForBasicInfo
     global flagForRecords
+    global flagForClinic
 
     flagForSymptoms = flag.flagForSymptoms
     flagForBasicInfo = flag.flagForBasicInfo
     flagForRecords = flag.flagForRecords
+    flagForClinic = flag.flagForClinic
 
     return "OK"
 
@@ -37,6 +40,8 @@ def get_for_flag():
         "flagForSymptoms": flagForSymptoms,
         "flagForBasicInfo": flagForBasicInfo,
         "flagForRecords": flagForRecords,
+        "flagForClinic": flagForClinic,
+
     })
 
 
@@ -93,12 +98,31 @@ def post_for_symptoms(symptoms: SymptomsModel):
 
 
 class ClinicModel(BaseModel):
-    forClinic: str
+    userID: str
 
 
 @app.post("/forClinic")
 def post_for_clinic(clinic: ClinicModel):
-    return "OK"
+    userid = clinic.userID
+
+    # Prepare the data
+    data = {'userid': userid}
+
+    # Send a POST request
+    response = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/accessdiagnosis', data=data)
+    # Extract data from the response
+    if response.status_code == 200:
+        user_data = response.json()
+    else:
+        user_data = {}
+
+    # Prepare the final result
+    result = {
+        "flag": flagForClinic,
+        "result": user_data['result']
+    }
+
+    return jsonable_encoder(result)
 
 
 class RecordsModel(BaseModel):
