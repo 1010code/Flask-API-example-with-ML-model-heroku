@@ -58,6 +58,7 @@ def get_for_basic_info():
     # Prepare the final result
     result = {
         "flag": flagForBasicInfo,
+        "userID":userid,
         "result": user_data['result']
     }
     return jsonable_encoder(result)
@@ -71,6 +72,7 @@ def post_for_symptoms(symptoms: SymptomsModel):
     return jsonable_encoder({
         "flag": flagForSymptoms,
         "result": {
+
             "symptom": "我今天頭很痛"
         }
     })
