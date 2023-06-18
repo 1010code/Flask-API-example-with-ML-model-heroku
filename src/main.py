@@ -86,7 +86,7 @@ def get_for_basic_info():
             user_data = {}
         time.sleep(0.2)
             
-    return jsonable_encoder(result)
+    return jsonable_encoder(result)+user_data
 
 class SymptomsModel(BaseModel):
     userID: str
