@@ -5,13 +5,25 @@ from flask_cors import CORS
 
 app = Flask(__name__)
 CORS(app)
+flagForSymptoms = 0
+flagForBasicInfo = 0
+flagForRecords = 0
+
+@app.route('/changeFlag', methods=['POST'])
+def postForChangeFlag():
+    global flagForSymptoms
+    global flagForBasicInfo
+    global flagForRecords
+
+    insertValues = request.get_json()
+    flagForSymptoms=insertValues['flagForSymptoms']
+    flagForBasicInfo=insertValues['flagForBasicInfo']
+    flagForRecords=insertValues['flagForRecords']
 
 @app.route('/basicInfo', methods=['GET'])
 def getForBasicInfo():
-    # 取得前端傳過來的數值
-    flag = 1
     result = {
-    "flag":"1",
+    "flag":flagForBasicInfo,
     "result":
     {
         
