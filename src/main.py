@@ -69,13 +69,27 @@ class SymptomsModel(BaseModel):
 
 @app.post("/symptoms")
 def post_for_symptoms(symptoms: SymptomsModel):
-    return jsonable_encoder({
-        "flag": flagForSymptoms,
-        "result": {
+    
+    userid = symptoms.userid
 
-            "symptom": "我今天頭很痛"
-        }
-    })
+    # Prepare the data
+    data = {'userid': userid}
+
+    # Send a POST request
+    response = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/accesssymptoms', data=data)
+    # Extract data from the response
+    if response.status_code == 200:
+        user_data = response.json()
+    else:
+        user_data = {}
+
+    # Prepare the final result
+    result = {
+        "flag": flagForSymptoms,
+        "result": user_data['result']
+    }
+
+    return jsonable_encoder(result)
 
 
 class ClinicModel(BaseModel):
