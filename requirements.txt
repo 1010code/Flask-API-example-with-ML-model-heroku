@@ -1,6 +1,10 @@
-Flask
-Flask-Cors
+Click
+fastapi
 gunicorn
-numpy
-scikit-learn==0.24.2
-xgboost==0.90
+h11
+httptools
+pydantic
+starlette
+uvicorn
+uvloop
+websockets
