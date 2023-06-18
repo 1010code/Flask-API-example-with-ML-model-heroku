@@ -20,6 +20,9 @@ def postForChangeFlag():
     flagForBasicInfo=insertValues['flagForBasicInfo']
     flagForRecords=insertValues['flagForRecords']
 
+    return "OK"
+
+
 @app.route('/basicInfo', methods=['GET'])
 def getForBasicInfo():
     result = {
