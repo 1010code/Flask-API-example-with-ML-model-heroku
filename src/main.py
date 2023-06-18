@@ -7,9 +7,9 @@ from fastapi.responses import JSONResponse
 app = FastAPI()
 
 # Global variables
-flagForSymptoms: Optional[int] = None
-flagForBasicInfo: Optional[int] = None
-flagForRecords: Optional[int] = None
+flagForSymptoms: Optional[int] = 0
+flagForBasicInfo: Optional[int] = 0
+flagForRecords: Optional[int] = 0
 
 
 class FlagModel(BaseModel):
