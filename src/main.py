@@ -133,33 +133,35 @@ def post_for_symptoms(symptoms: SymptomsModel):
 
     # Prepare the data
     data = {'userid': userid}
-
+    if flagForSymptoms == 1:
     # Send a POST request
-    response = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/accesssymptoms', data=data)
-    # Extract data from the response
-    if response.status_code == 200:
-        user_data = response.json()
-    else:
-        user_data = {}
-
-    # Prepare the final result
-    result = {
-        "flag": flag,
-        "result": user_data['result']
-    }
-    changeFlag = {
-        "target": "flagForSymptoms",
-        "val": 0, 
-    }
-    for i in range(5):
-    # Send a POST request
-        response = requests.post(urlForChange, json=changeFlag)
+        response = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/accesssymptoms', data=data)
         # Extract data from the response
         if response.status_code == 200:
             user_data = response.json()
         else:
             user_data = {}
-        time.sleep(0.2)
+        # Prepare the final result
+        result = {
+            "flag": flag,
+            "result": user_data['result']
+        }
+        changeFlag = {
+            "target": "flagForSymptoms",
+            "val": 0, 
+        }
+        for i in range(5):
+        # Send a POST request
+            response = requests.post(urlForChange, json=changeFlag)
+            # Extract data from the response
+            if response.status_code == 200:
+                user_data = response.json()
+            else:
+                user_data = {}
+            time.sleep(0.2)
+    else:
+        result = "Fail"
+        
     return jsonable_encoder(result)
 
 
