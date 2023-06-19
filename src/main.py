@@ -153,6 +153,7 @@ def post_for_symptoms(symptoms: SymptomsModel):
         response = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/diagnosis', data=data1)
         # Prepare the data
         data2 = {
+            'userid': userid,
             "尿潛血": "-",
             "B型肝炎e抗原": "-",
             "B型肝炎表面抗原": "-",
