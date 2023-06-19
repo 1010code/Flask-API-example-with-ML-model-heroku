@@ -107,7 +107,7 @@ def get_for_basic_info():
     }
     # changeFlag = {
     #     "target": "flagForBasicInfo",
-    #     "val": 0, 
+    #     "val": 0 
     # }
     # for i in range(5):
     # # Send a POST request
@@ -142,12 +142,12 @@ def post_for_symptoms(symptoms: SymptomsModel):
         # Prepare the final result
         
         result = {
-            "flag": flag,
-            "result": user_data['result']
+            'flag': flag,
+            'result': user_data['result']
         }
          # Prepare the data
         data1 = {'userid': userid,
-                 "returns": "否",
+                 'returns': "否",
                 'diagnosis': "發炎, 開立消炎藥"}
         # Send a POST request
         response = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/diagnosis', data=data1)
@@ -176,7 +176,7 @@ def post_for_symptoms(symptoms: SymptomsModel):
         response = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/testinfo', data=data2)
         changeFlag = {
             "target": "flagForSymptoms",
-            "val": 0, 
+            "val": 0
         }
        
         for i in range(5):
@@ -196,7 +196,7 @@ def post_for_symptoms(symptoms: SymptomsModel):
             }
         }
         
-    return jsonable_encoder(response)
+    return jsonable_encoder(result)
 
 
 class ClinicModel(BaseModel):
@@ -221,7 +221,7 @@ def post_for_clinic(clinic: ClinicModel):
     }
     changeFlag = {
         "target": "flagForClinic",
-        "val": 0, 
+        "val": 0 
     }
     for i in range(5):
     # Send a POST request
@@ -260,7 +260,7 @@ def post_for_records(records: RecordsModel):
     }
     changeFlag = {
         "target": "flagForRecords",
-        "val": 0, 
+        "val": 0 
     }
     for i in range(5):
     # Send a POST request
