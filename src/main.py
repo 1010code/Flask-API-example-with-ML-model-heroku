@@ -85,7 +85,7 @@ def get_for_flag():
 
 @app.get("/basicInfo")
 def get_for_basic_info():
-    userid = "Ace"
+    userid = "Ue1350bef1851afd418a9aa81e444eaa7"
     flag = flagForBasicInfo
 
     # Prepare the data
@@ -105,32 +105,30 @@ def get_for_basic_info():
         "userID":userid,
         "result": user_data['result']
     }
-    changeFlag = {
-        "target": "flagForBasicInfo",
-        "val": 0, 
-    }
-    for i in range(5):
-    # Send a POST request
-        response = requests.post(urlForChange, json=changeFlag)
-        # Extract data from the response
-        if response.status_code == 200:
-            user_data = response.json()
-        else:
-            user_data = {}
-        time.sleep(0.2)
+    # changeFlag = {
+    #     "target": "flagForBasicInfo",
+    #     "val": 0, 
+    # }
+    # for i in range(5):
+    # # Send a POST request
+    #     response = requests.post(urlForChange, json=changeFlag)
+    #     # Extract data from the response
+    #     if response.status_code == 200:
+    #         user_data = response.json()
+    #     else:
+    #         user_data = {}
+    #     time.sleep(0.2)
             
     return jsonable_encoder(result)
 
+
 class SymptomsModel(BaseModel):
     userID: str
-
-
 @app.post("/symptoms")
 def post_for_symptoms(symptoms: SymptomsModel):
-    
+
     userid = symptoms.userID
     flag = flagForSymptoms
-
     # Prepare the data
     data = {'userid': userid}
     if flagForSymptoms == 1:
@@ -172,16 +170,12 @@ def post_for_symptoms(symptoms: SymptomsModel):
 
 class ClinicModel(BaseModel):
     userID: str
-
-
 @app.post("/forClinic")
 def post_for_clinic(clinic: ClinicModel):
     userid = clinic.userID
     flag = flagForClinic
-
     # Prepare the data
     data = {'userid': userid}
-
     # Send a POST request
     response = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/accessdiagnosis', data=data)
     # Extract data from the response
@@ -189,7 +183,6 @@ def post_for_clinic(clinic: ClinicModel):
         user_data = response.json()
     else:
         user_data = {}
-
     # Prepare the final result
     result = {
         "flag": flag,
@@ -213,8 +206,6 @@ def post_for_clinic(clinic: ClinicModel):
 
 class RecordsModel(BaseModel):
     userID: str
-
-
 @app.post("/records")
 def post_for_records(records: RecordsModel):
     userid = records.userID
@@ -255,8 +246,6 @@ def post_for_records(records: RecordsModel):
 
 class NextStepModel(BaseModel):
     nextStep: str
-
-
 @app.post("/nextStep")
 def post_next_step(next_step: NextStepModel):
     return "OK"
