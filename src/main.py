@@ -33,15 +33,15 @@ def post_for_change_flag(flag: FlagModel):
         flagForSymptoms = flag.val
         return "OK"
     
-    elif flag.target == "flagForSymptoms":
+    elif flag.target == "flagForBasicInfo":
         flagForSymptoms = flag.val
         return "OK"
     
-    elif flag.target == "flagForSymptoms":
+    elif flag.target == "flagForRecords":
         flagForSymptoms = flag.val
         return "OK"
     
-    elif flag.target == "flagForSymptoms":
+    elif flag.target == "flagForClinic":
         flagForSymptoms = flag.val
         return "OK"
     
