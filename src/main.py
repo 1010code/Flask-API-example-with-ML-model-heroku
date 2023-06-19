@@ -17,10 +17,9 @@ flagForClinic: Optional[int] = 0
 urlForChange= "https://for-api-32f276cf322d.herokuapp.com/changeFlag"
 
 class FlagModel(BaseModel):
-    flagForSymptoms: int
-    flagForBasicInfo: int
-    flagForRecords: int
-    flagForClinic: int
+    target: str
+    val: int
+   
 
 
 @app.post("/changeFlag")
@@ -30,12 +29,24 @@ def post_for_change_flag(flag: FlagModel):
     global flagForRecords
     global flagForClinic
 
-    flagForSymptoms = flag.flagForSymptoms
-    flagForBasicInfo = flag.flagForBasicInfo
-    flagForRecords = flag.flagForRecords
-    flagForClinic = flag.flagForClinic
+    if flag.target == "flagForSymptoms":
+        flagForSymptoms = flag.val
+        return "OK"
+    
+    elif flag.target == "flagForSymptoms":
+        flagForSymptoms = flag.val
+        return "OK"
+    
+    elif flag.target == "flagForSymptoms":
+        flagForSymptoms = flag.val
+        return "OK"
+    
+    elif flag.target == "flagForSymptoms":
+        flagForSymptoms = flag.val
+        return "OK"
+    
 
-    return "OK"
+    return "fail"
 
 
 @app.get("/getFlag")
@@ -72,10 +83,8 @@ def get_for_basic_info():
         "result": user_data['result']
     }
     changeFlag = {
-        "flagForSymptoms": flagForSymptoms,
-        "flagForBasicInfo": 0,
-        "flagForRecords": flagForRecords,
-        "flagForClinic": flagForClinic,
+        "target": "flagForBasicInfo",
+        "val": 0, 
     }
     for i in range(5):
     # Send a POST request
@@ -116,10 +125,8 @@ def post_for_symptoms(symptoms: SymptomsModel):
         "result": user_data['result']
     }
     changeFlag = {
-        "flagForSymptoms": 0,
-        "flagForBasicInfo": flagForBasicInfo,
-        "flagForRecords": flagForRecords,
-        "flagForClinic": flagForClinic,
+        "target": "flagForSymptoms",
+        "val": 0, 
     }
     for i in range(5):
     # Send a POST request
@@ -159,10 +166,8 @@ def post_for_clinic(clinic: ClinicModel):
         "result": user_data['result']
     }
     changeFlag = {
-        "flagForSymptoms": flagForSymptoms,
-        "flagForBasicInfo": flagForBasicInfo,
-        "flagForRecords": flagForRecords,
-        "flagForClinic": 0,
+        "target": "flagForClinic",
+        "val": 0, 
     }
     for i in range(5):
     # Send a POST request
@@ -202,10 +207,8 @@ def post_for_records(records: RecordsModel):
         "result": user_data['result']
     }
     changeFlag = {
-        "flagForSymptoms": flagForSymptoms,
-        "flagForBasicInfo": flagForBasicInfo,
-        "flagForRecords": 0,
-        "flagForClinic": flagForClinic,
+        "target": "flagForRecords",
+        "val": 0, 
     }
     for i in range(5):
     # Send a POST request
