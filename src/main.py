@@ -140,16 +140,14 @@ def post_for_symptoms(symptoms: SymptomsModel):
         else:
             user_data = {}
         # Prepare the final result
+        
         result = {
             "flag": flag,
             "result": user_data['result']
         }
-        changeFlag = {
-            "target": "flagForSymptoms",
-            "val": 0, 
-        }
-        # Prepare the data
+         # Prepare the data
         data1 = {'userid': userid,
+                 "returns": "否",
                 'diagnosis': "發炎, 開立消炎藥"}
         # Send a POST request
         response = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/diagnosis', data=data1)
@@ -175,6 +173,11 @@ def post_for_symptoms(symptoms: SymptomsModel):
         }
         # Send a POST request
         response = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/testinfo', data=data2)
+        changeFlag = {
+            "target": "flagForSymptoms",
+            "val": 0, 
+        }
+       
         for i in range(5):
         # Send a POST request
             response = requests.post(urlForChange, json=changeFlag)
@@ -192,7 +195,7 @@ def post_for_symptoms(symptoms: SymptomsModel):
             }
         }
         
-    return jsonable_encoder(result)
+    return jsonable_encoder(response)
 
 
 class ClinicModel(BaseModel):
