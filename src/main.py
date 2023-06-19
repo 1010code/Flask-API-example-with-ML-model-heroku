@@ -49,6 +49,29 @@ def post_for_change_flag(flag: FlagModel):
     return "fail"
 
 
+
+class AllFlagModel(BaseModel):
+    flagForSymptoms: int
+    flagForBasicInfo: int
+    flagForRecords: int
+    flagForClinic: int
+
+
+@app.post("/changeAllFlag")
+def post_for_change_flag(flag: AllFlagModel):
+    global flagForSymptoms
+    global flagForBasicInfo
+    global flagForRecords
+    global flagForClinic
+
+    flagForSymptoms = flag.flagForSymptoms
+    flagForBasicInfo = flag.flagForBasicInfo
+    flagForRecords = flag.flagForRecords
+    flagForClinic = flag.flagForClinic
+
+    return "OK"
+
+
 @app.get("/getFlag")
 def get_for_flag():
     return jsonable_encoder({
