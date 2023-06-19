@@ -58,7 +58,7 @@ class AllFlagModel(BaseModel):
 
 
 @app.post("/changeAllFlag")
-def post_for_change_flag(flag: AllFlagModel):
+def post_for_change_All_flag(flag: AllFlagModel):
     global flagForSymptoms
     global flagForBasicInfo
     global flagForRecords
