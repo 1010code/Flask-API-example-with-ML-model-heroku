@@ -11,8 +11,8 @@ app = FastAPI()
 # Global variables
 flagForSymptoms: Optional[int] = 0
 flagForBasicInfo: Optional[int] = 0
-flagForRecords: Optional[int] = 0
-flagForClinic: Optional[int] = 0
+flagForRecords: Optional[int] = 1
+flagForClinic: Optional[int] = 1
 
 urlForChange= "https://for-api-32f276cf322d.herokuapp.com/changeFlag"
 
