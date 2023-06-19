@@ -162,7 +162,9 @@ def post_for_symptoms(symptoms: SymptomsModel):
     else:
         result = {
             "flag":0,
+            "result":{
             "symptoms":""
+            }
         }
         
     return jsonable_encoder(result)
