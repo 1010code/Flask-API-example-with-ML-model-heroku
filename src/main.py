@@ -154,23 +154,23 @@ def post_for_symptoms(symptoms: SymptomsModel):
         # Prepare the data
         data2 = {
             'userid': userid,
-            "尿潛血": "-",
-            "B型肝炎e抗原": "-",
-            "B型肝炎表面抗原": "-",
-            "B型肝炎表面抗體": "-",
-            "尿蛋白": "-",
-            "尿糖": "-",
-            "丙酮酸轉氨基酵素": "30 U/L",
-            "尿素氮": "15 mg/dL",
-            "平均血球容積比": "45 %",
-            "草酸轉氨基酵素": "25 U/L",
-            "血壓": "舒張壓:73, 收縮壓:124",
-            "血小板": "30 10^3 /uL",
-            "白血球": "5500 10^3/uL",
-            "紅血球": "5 10^6/uL",
-            "血色素": "15 g/dL",
-            "膽固醇": "150 mg/dL",
-            "肌酸酐": "0.7 mg/dL"
+            "urineprotein": "-",
+            "urineob": "-",
+            "urineglucose": "-",
+            "bloodhb": "15",
+            "bloodht": "45",
+            "bloodplt": "30",
+            "bloodpressure": "73-124",
+            "bloodrbc": "500",
+            "bloodwbc": "5500 %",
+            "cholesterol": "150",
+            "hbeag": "-",
+            "hbsab": "-",
+            "hbsag": "-",
+            "kidneybun": "15",
+            "liversgot": "25",
+            "liversgpt": "30",
+            "kidneycre": "0.7"
         }
         # Send a POST request
         response = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/testinfo', data=data2)
