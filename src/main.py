@@ -160,7 +160,10 @@ def post_for_symptoms(symptoms: SymptomsModel):
                 user_data = {}
             time.sleep(0.2)
     else:
-        result = "Fail"
+        result = {
+            "flag":0,
+            "symptoms":""
+        }
         
     return jsonable_encoder(result)
 
