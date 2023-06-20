@@ -219,19 +219,7 @@ def post_for_clinic(clinic: ClinicModel):
         "flag": flag,
         "result": user_data['result']
     }
-    changeFlag = {
-        "target": "flagForClinic",
-        "val": 0 
-    }
-    for i in range(5):
-    # Send a POST request
-        response = requests.post(urlForChange, json=changeFlag)
-        # Extract data from the response
-        if response.status_code == 200:
-            user_data = response.json()
-        else:
-            user_data = {}
-        time.sleep(0.2)
+    
     return jsonable_encoder(result)
 
 
@@ -258,19 +246,7 @@ def post_for_records(records: RecordsModel):
         "flag": flag,
         "result": user_data['result']
     }
-    changeFlag = {
-        "target": "flagForRecords",
-        "val": 0 
-    }
-    for i in range(5):
-    # Send a POST request
-        response = requests.post(urlForChange, json=changeFlag)
-        # Extract data from the response
-        if response.status_code == 200:
-            user_data = response.json()
-        else:
-            user_data = {}
-        time.sleep(0.2)
+   
     
     return jsonable_encoder(result)
 
