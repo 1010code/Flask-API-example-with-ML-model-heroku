@@ -290,12 +290,22 @@ def post_for_update_test_info(updateDate: updateDataModel):
         user_data = {}
         return updateDate.userID
     info_key_mapping = {"姓名":"name", "性別":"gender", "年齡": "age", "身高": "height", "體重": "weight", "家族病史": "family", "個人病史": "record"}
-    send_user_data = {}
-    send_user_data['userid'] = userID
-    send_user_data['record'] = updateDate.clinicData
     
-    for i in user_data['result']:
-        send_user_data[info_key_mapping[i]] = user_data['result'][i]
+    # send_user_data = {}
+    # send_user_data['userid'] = userID
+    # send_user_data['record'] = updateDate.clinicData
+    # for i in user_data['result']:
+    #     send_user_data[info_key_mapping[i]] = user_data['result'][i]
+    send_user_data={
+  "userid": "Ue1350bef1851afd418a9aa81e444eaa7",
+  "record": "3333",
+  "gender": "男",
+  "name": "李小明",
+  "weight": "75",
+  "family": "肝癌, 糖尿病",
+  "height": "180",
+  "age": "20"
+}
     response2 = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/basic', data=send_user_data)
     # Extract data from the response
     if response.status_code == 200:
