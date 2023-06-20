@@ -216,7 +216,7 @@ def post_for_clinic(clinic: ClinicModel):
         user_data = {}
     # Prepare the final result
     result = {
-        result:{
+        "result":{
             "userID":"Ace",
             "是否需要檢驗":"0",
             "診斷結果": "發炎, 開立消炎藥"
