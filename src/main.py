@@ -246,8 +246,9 @@ def post_for_records(records: RecordsModel):
 
     # Prepare the final result
     result = {
-        "flag": flag,
-        "result": user_data['result']
+        "result": {userid,
+        user_data['result']
+        }
     }
    
     
