@@ -262,10 +262,7 @@ def get_for_basic_info():
     return jsonable_encoder({
         "flag": flagForBasicInfo,
         "result": {
-            "id": "Ace",
-            "familyHistory": "心臟病, 高血壓, 糖尿病",
             "weight": "60",
-            "age": "18",
             "height": "180"
         }
     })
