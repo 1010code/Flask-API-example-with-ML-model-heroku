@@ -279,7 +279,8 @@ class updateDataModel(BaseModel):
 @app.post("/updateTestInfo")
 def post_for_update_test_info(updateDate: updateDataModel):
     
-    data = {'userid': updateDate.userID}
+    userID = "Ue1350bef1851afd418a9aa81e444eaa7"
+    data = {'userid': userID}
     # Send a POST request
     response = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/accessbasic', data=data)
     # Extract data from the response
