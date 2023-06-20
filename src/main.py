@@ -218,10 +218,7 @@ def post_for_clinic(clinic: ClinicModel):
     result = {
         "result":{
             "userID":userid,
-            "clinic":{
-                "是否需要檢驗":"",
-                "診斷結果": ""
-            }
+            "clinic":user_data
         }
         
     }
@@ -265,7 +262,7 @@ def post_next_step(next_step: NextStepModel):
     return "OK"
 
 
-@app.get("/FakeBasicInfo")
+@app.get("/fakeBasicInfo")
 def get_for_basic_info():
     return jsonable_encoder({
         "flag": flagForBasicInfo,
@@ -274,3 +271,31 @@ def get_for_basic_info():
             "height": "180"
         }
     })
+
+class updateDataModel(BaseModel):
+    clinicData: str
+    userID: str
+
+@app.post("/updateTestInfo")
+def post_for_update_test_info(updateDate: updateDataModel):
+    
+    data = {'userid': updateDate.userID}
+    # Send a POST request
+    response = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/accessbasic', data=data)
+    # Extract data from the response
+    if response.status_code == 200:
+        user_data = response.json()
+    else:
+        user_data = {}
+    
+    user_data['result']['record'] = updateDate.clinicData
+
+    response2 = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/basic', data=user_data)
+    # Extract data from the response
+    if response.status_code == 200:
+        user_data = response.json()
+    else:
+        user_data = {}
+
+    return "OK"
+    
