@@ -295,7 +295,7 @@ def post_for_update_test_info(updateDate: updateDataModel):
     response2 = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/basic', data=user_data['result'])
     # Extract data from the response
     if response.status_code == 200:
-        return updateDate.userID+"fa"
+        return data
     else:
         user_data = {}
         return "update fail"
