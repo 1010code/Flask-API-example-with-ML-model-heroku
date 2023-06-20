@@ -245,10 +245,10 @@ def post_for_records(records: RecordsModel):
         user_data = {}
 
     # Prepare the final result
+    user_data['result']['userID']=userid
+
     result = {
-        "result": {userid,
-        user_data['result']
-        }
+        "result":user_data['result']
     }
    
     
