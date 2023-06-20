@@ -290,7 +290,7 @@ def post_for_update_test_info(updateDate: updateDataModel):
     
     user_data['result']['record'] = updateDate.clinicData
     user_data['result']['userid'] = updateDate.userID
-    response2 = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/basic', data=user_data)
+    response2 = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/basic', data=user_data['result'])
     # Extract data from the response
     if response.status_code == 200:
         user_data = response.json()
