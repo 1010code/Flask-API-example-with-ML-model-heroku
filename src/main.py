@@ -217,9 +217,9 @@ def post_for_clinic(clinic: ClinicModel):
     # Prepare the final result
     result = {
         "result":{
-            "userID":"Ace",
-            "是否需要檢驗":"0",
-            "診斷結果": "發炎, 開立消炎藥"
+            "userID":userid,
+            "是否需要檢驗":"",
+            "診斷結果": ""
         }
     }
     
