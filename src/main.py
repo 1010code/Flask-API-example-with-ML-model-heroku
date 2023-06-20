@@ -287,7 +287,7 @@ def post_for_update_test_info(updateDate: updateDataModel):
         user_data = response.json()
     else:
         user_data = {}
-        return "get fail"
+        return updateDate.userID
     
     user_data['result']['record'] = updateDate.clinicData
     user_data['result']['userid'] = updateDate.userID
