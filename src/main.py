@@ -218,9 +218,12 @@ def post_for_clinic(clinic: ClinicModel):
     result = {
         "result":{
             "userID":userid,
-            "是否需要檢驗":"",
-            "診斷結果": ""
+            "clinic":{
+                "是否需要檢驗":"",
+                "診斷結果": ""
+            }
         }
+        
     }
     
     return jsonable_encoder(result)
