@@ -266,14 +266,17 @@ class NextStepModel(BaseModel):
 def post_next_step(next_step: NextStepModel):
     return "OK"
 
+class waitModel(BaseModel):
+    userid : str
+    
+@app.post("/wait")
+def wait(wait: waitModel):
 
-@app.get("/fakeBasicInfo")
-def get_for_basic_info():
+
+    
     return jsonable_encoder({
-        "flag": flagForBasicInfo,
         "result": {
-            "weight": "60",
-            "height": "180"
+            "userID": wait.userid
         }
     })
 
