@@ -209,9 +209,20 @@ class isReturnModel(BaseModel):
 @app.post("/isReturn")
 def post_for_isReturn(isReturn: isReturnModel):
     data = isReturn.message
+    userid = isReturn.userID
 
     score = [int(i) for i in re.findall(r'\d+', data)]
-    return score
+    if score > 7: 
+        result = {'message':'請您立即回診',
+                  'userID': userid}
+        requests.post('https://i-care-te-st-21770a966fd0.herokuapp.com/external_api', json=result)
+        return "1"
+    else:
+        result = {'message':'您的狀況良好!請繼續保持!OvO',
+                  'userID': userid}
+        requests.post('https://i-care-te-st-21770a966fd0.herokuapp.com/external_api', json=result)
+        return "0"
+    
 
 class messageModel(BaseModel):
     userID: str
