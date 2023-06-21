@@ -4,7 +4,7 @@ from typing import Optional
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
 import requests
-import time
+import re
 
 app = FastAPI()
 
@@ -202,4 +202,39 @@ def post_for_update_clinic(updateData: updateDataModel):
         user_data = {}
         return "update fail"
 
+class isReturnModel(BaseModel):
+    message: str
+    userID: str
+
+@app.post("/isReturn")
+def post_for_isReturn(isReturn: isReturnModel):
+    data = isReturn.message
+
+    score = [int(i) for i in re.findall(r'\d+', data)]
+    return score
+
+class messageModel(BaseModel):
+    userID: str
+@app.post("/messages")
+def post_for_records(data_messages: messageModel):
+    userid = data_messages.userID
+    # Prepare the data
+    data = {'userid': userid}
+
+    # Send a POST request
+    response = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/accessmessage', data=data)
+    # Extract data from the response
+    if response.status_code == 200:
+        user_data = response.json()
+    else:
+        user_data = {}
+
+    # Prepare the final result
+    user_data['result']['userID']=userid
+
+    result = {
+        "result":user_data['result']
+    }
+   
     
+    return jsonable_encoder(result)
