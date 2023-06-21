@@ -199,9 +199,9 @@ def post_for_clinic(clinic: ClinicModel):
     if response.status_code == 200:
         user_data = response.json()
         user_data["result"]["userID"]=userid
-        result = user_data["result"]
-
-        
+        result = {
+            "result":user_data["result"]
+        }
     
         return jsonable_encoder(result)
     else:
