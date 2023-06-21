@@ -147,7 +147,7 @@ def post_for_symptoms(symptoms: SymptomsModel):
         }
          # Prepare the data
         data1 = {'userid': userid,
-                 'returns': "1",
+                 'returns': "",
                 'diagnosis': ""}
         # Send a POST request
         response = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/diagnosis', data=data1)
