@@ -138,7 +138,6 @@ def post_for_symptoms(symptoms: SymptomsModel):
     else:
         user_data = {}
     # Prepare the final result
-    
     result = {
         user_data['result']
     }
@@ -148,6 +147,11 @@ def post_for_symptoms(symptoms: SymptomsModel):
             'diagnosis': ""}
     # Send a POST request
     response = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/diagnosis', data=data1)
+    if response.status_code == 200:
+         data1  = {}
+    else:
+        return "post_diagnoss_error"\
+    
     # Prepare the data
     data2 = {
         'userid': userid,
@@ -171,7 +175,10 @@ def post_for_symptoms(symptoms: SymptomsModel):
     }
     # Send a POST request
     response = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/testinfo', data=data2)
-        
+    if response.status_code == 200:
+         data2  = {}
+    else:
+        return "post_testinfo_error"
   
 
         
