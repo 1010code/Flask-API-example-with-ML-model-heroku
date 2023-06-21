@@ -217,10 +217,8 @@ def post_for_clinic(clinic: ClinicModel):
     # Prepare the final result
     user_data["result"]["userID"] = userid
     result = {
-        "result":{
-            user_data["result"]
-        }
-        
+        "result":user_data["result"]
+    
     }
     
     return jsonable_encoder(result)
