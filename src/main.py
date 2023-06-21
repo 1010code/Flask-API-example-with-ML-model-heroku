@@ -128,69 +128,52 @@ class SymptomsModel(BaseModel):
 def post_for_symptoms(symptoms: SymptomsModel):
 
     userid = symptoms.userID
-    flag = flagForSymptoms
     # Prepare the data
     data = {'userid': userid}
-    if flagForSymptoms == 1:
     # Send a POST request
-        response = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/accesssymptoms', data=data)
-        # Extract data from the response
-        if response.status_code == 200:
-            user_data = response.json()
-        else:
-            user_data = {}
-        # Prepare the final result
-        
-        result = {
-            user_data['result']
-        }
-         # Prepare the data
-        data1 = {'userid': userid,
-                 'returns': "",
-                'diagnosis': ""}
-        # Send a POST request
-        response = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/diagnosis', data=data1)
-        # Prepare the data
-        data2 = {
-            'userid': userid,
-            "urineprotein": "-",
-            "urineob": "-",
-            "urineglucose": "-",
-            "bloodhb": "15",
-            "bloodht": "45",
-            "bloodplt": "30",
-            "bloodpressure": "73-124",
-            "bloodrbc": "500",
-            "bloodwbc": "5500 %",
-            "cholesterol": "150",
-            "hbeag": "-",
-            "hbsab": "-",
-            "hbsag": "-",
-            "kidneybun": "15",
-            "liversgot": "25",
-            "liversgpt": "30",
-            "kidneycre": "0.7"
-        }
-        # Send a POST request
-        response = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/testinfo', data=data2)
-        changeFlag = {
-            "target": "flagForSymptoms",
-            "val": 0
-        }
-       
-        for i in range(5):
-        # Send a POST request
-            response = requests.post(urlForChange, json=changeFlag)
-            # Extract data from the response
-            if response.status_code == 200:
-                user_data = response.json()
-            else:
-                user_data = {}
-            time.sleep(0.2)
+    response = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/accesssymptoms', data=data)
+    # Extract data from the response
+    if response.status_code == 200:
+        user_data = response.json()
     else:
-        result = {
-            "symptoms":""
-        }
+        user_data = {}
+    # Prepare the final result
+    
+    result = {
+        user_data['result']
+    }
+        # Prepare the data
+    data1 = {'userid': userid,
+                'returns': "",
+            'diagnosis': ""}
+    # Send a POST request
+    response = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/diagnosis', data=data1)
+    # Prepare the data
+    data2 = {
+        'userid': userid,
+        "urineprotein": "-",
+        "urineob": "-",
+        "urineglucose": "-",
+        "bloodhb": "15",
+        "bloodht": "45",
+        "bloodplt": "30",
+        "bloodpressure": "73-124",
+        "bloodrbc": "500",
+        "bloodwbc": "5500 %",
+        "cholesterol": "150",
+        "hbeag": "-",
+        "hbsab": "-",
+        "hbsag": "-",
+        "kidneybun": "15",
+        "liversgot": "25",
+        "liversgpt": "30",
+        "kidneycre": "0.7"
+    }
+    # Send a POST request
+    response = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/testinfo', data=data2)
+        
+  
+
         
     return jsonable_encoder(result)
 
