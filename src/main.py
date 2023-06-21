@@ -215,9 +215,9 @@ def post_for_clinic(clinic: ClinicModel):
     else:
         user_data = {}
     # Prepare the final result
+    user_data["userID"] = userid
     result = {
         "result":{
-            "userID":userid,
             "clinic":user_data
         }
         
