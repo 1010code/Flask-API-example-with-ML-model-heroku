@@ -267,16 +267,16 @@ def post_next_step(next_step: NextStepModel):
     return "OK"
 
 class waitModel(BaseModel):
-    userid : str
+    userID : str
     
 @app.post("/wait")
 def wait(wait: waitModel):
 
 
-    
+
     return jsonable_encoder({
         "result": {
-            "userID": wait.userid
+            "userID": wait.userID
         }
     })
 
