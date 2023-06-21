@@ -201,6 +201,7 @@ def post_for_symptoms(symptoms: SymptomsModel):
 
 class ClinicModel(BaseModel):
     userID: str
+
 @app.post("/forClinic")
 def post_for_clinic(clinic: ClinicModel):
     userid = clinic.userID
@@ -224,7 +225,7 @@ def post_for_clinic(clinic: ClinicModel):
     
     }
     
-    return jsonable_encoder(result)
+    return jsonable_encoder(user_data["result"])
 
 
 class RecordsModel(BaseModel):
