@@ -212,7 +212,7 @@ def post_for_isReturn(isReturn: isReturnModel):
     userid = isReturn.userID
 
     score = [int(i) for i in re.findall(r'\d+', data)]
-    if score > 7: 
+    if score[0] > 7: 
         result = {'message':'請您立即回診',
                   'userID': userid}
         requests.post('https://i-care-te-st-21770a966fd0.herokuapp.com/external_api', json=result)
