@@ -221,7 +221,7 @@ def post_for_clinic(clinic: ClinicModel):
     result = {
         "result":{
             "userID":userid,
-            "clinic":user_data
+            "clinic":user_data[result]
         }
         
     }
