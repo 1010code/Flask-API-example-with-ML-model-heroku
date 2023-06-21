@@ -138,9 +138,8 @@ def post_for_symptoms(symptoms: SymptomsModel):
     else:
         user_data = {}
     # Prepare the final result
-    result = {
-        user_data['result']
-    }
+    result = user_data['result']
+    
         # Prepare the data
     data1 = {'userid': userid,
                 'returns': "",
@@ -150,7 +149,7 @@ def post_for_symptoms(symptoms: SymptomsModel):
     if response.status_code == 200:
          data1  = {}
     else:
-        return "post_diagnoss_error"\
+        return "post_diagnoss_error"
     
     # Prepare the data
     data2 = {
