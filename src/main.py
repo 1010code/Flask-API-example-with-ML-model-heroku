@@ -276,10 +276,10 @@ class updateDataModel(BaseModel):
     clinicData: str
     userID: str
 
-@app.post("/updateTestInfo")
-def post_for_update_test_info(updateDate: updateDataModel):
+@app.post("/updateClinic")
+def post_for_update_clinic(updateData: updateDataModel):
     
-    data = {'userid': updateDate.userID}
+    data = {'userid': updateData.userID}
     # Send a POST request
     response = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/accessbasic', data=data)
     # Extract data from the response
@@ -287,15 +287,15 @@ def post_for_update_test_info(updateDate: updateDataModel):
         user_data = response.json()
     else:
         user_data = {}
-        return updateDate.userID
+        return updateData.userID
     info_key_mapping = {"姓名":"name", "性別":"gender", "年齡": "age", "身高": "height", "體重": "weight", "家族病史": "family", "個人病史": "record"}
     
     send_user_data = {}
 
     for i in user_data['result']:
         send_user_data[info_key_mapping[i]] = user_data['result'][i]
-    send_user_data['userid'] = updateDate.userID
-    send_user_data['record'] = updateDate.clinicData
+    send_user_data['userid'] = updateData.userID
+    send_user_data['record'] = updateData.clinicData
 
     response2 = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/basic', data=send_user_data)
     # Extract data from the response
