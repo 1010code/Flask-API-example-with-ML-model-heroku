@@ -215,18 +215,20 @@ def post_for_clinic(clinic: ClinicModel):
     # Extract data from the response
     if response.status_code == 200:
         user_data = response.json()
-    else:
-        user_data = {}
-    # Prepare the final result
-    result = {
-        "result":{
+        result = {
+            "result":{
             "userID":userid,
             "clinic":user_data[result]
         }
         
     }
     
-    return jsonable_encoder(result)
+        return jsonable_encoder(result)
+    else:
+        user_data = {}
+        return "R"
+    # Prepare the final result
+ 
 
 
 class RecordsModel(BaseModel):
