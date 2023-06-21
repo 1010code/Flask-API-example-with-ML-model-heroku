@@ -142,8 +142,7 @@ def post_for_symptoms(symptoms: SymptomsModel):
         # Prepare the final result
         
         result = {
-            'flag': flag,
-            'result': user_data['result']
+            user_data['result']
         }
          # Prepare the data
         data1 = {'userid': userid,
@@ -190,17 +189,12 @@ def post_for_symptoms(symptoms: SymptomsModel):
             time.sleep(0.2)
     else:
         result = {
-            "flag":0,
-            "result":{
             "symptoms":""
-            }
         }
         
     return jsonable_encoder(result)
 
 
-class ClinicModel(BaseModel):
-    userID: str
 
 class ClinicModel(BaseModel):
     userID: str
