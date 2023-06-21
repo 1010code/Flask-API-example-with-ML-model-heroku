@@ -202,6 +202,8 @@ def post_for_symptoms(symptoms: SymptomsModel):
 class ClinicModel(BaseModel):
     userID: str
 
+class ClinicModel(BaseModel):
+    userID: str
 @app.post("/forClinic")
 def post_for_clinic(clinic: ClinicModel):
     userid = clinic.userID
@@ -210,22 +212,21 @@ def post_for_clinic(clinic: ClinicModel):
     data = {'userid': userid}
     # Send a POST request
     response = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/accessdiagnosis', data=data)
-    data_for_result = {}
     # Extract data from the response
     if response.status_code == 200:
         user_data = response.json()
-
     else:
         user_data = {}
-        return "erro"
     # Prepare the final result
     result = {
-        "userID":userid,
-        "result":{user_data["result"]}
-    
+        "result":{
+            "userID":userid,
+            "clinic":user_data
+        }
+        
     }
     
-    return jsonable_encoder(user_data["result"])
+    return jsonable_encoder(result)
 
 
 class RecordsModel(BaseModel):
