@@ -223,7 +223,7 @@ def post_for_clinic(clinic: ClinicModel):
         
     }
     
-        return jsonable_encoder(result)
+        return jsonable_encoder(user_data[result])
     else:
         user_data = {}
         return "R"
