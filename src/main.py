@@ -18,7 +18,7 @@ def postForMultiUser(multiUser: multiUserModel):
     getData = response.json()
     userQueue = eval(getData['result']['flagforuser'])
     userQueue.append(userid)
-
+    print(jsonable_encoder(userQueue))
     postData = {"userid": "multiUser",
                 "flagforuser": jsonable_encoder(userQueue),
                 "flagforsymptom":getData['result']['flagforsymptom'],
