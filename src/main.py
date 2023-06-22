@@ -18,8 +18,9 @@ def postForMultiUser(multiUser: multiUserModel):
     getData = response.json()
     userQueue = eval(getData['result']['flagforuser'])
     userQueue.append(userid)
+
     postData = {"userid": "multiUser",
-                "flagforuser": userQueue,
+                "flagforuser": jsonable_encoder(userQueue),
                 "flagforsymptom":getData['result']['flagforsymptom'],
                 "flagfordaily":getData['result']['flagfordaily']}
     response = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/flag', data=postData)
