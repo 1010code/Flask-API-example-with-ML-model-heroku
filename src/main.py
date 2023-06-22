@@ -8,6 +8,27 @@ import re
 
 app = FastAPI()
 
+class multiUserModel(BaseModel):
+    userID: str
+@app.post("/testMultiUser")
+def postForMultiUser(multiUser: multiUserModel):
+    userid = multiUser.userID
+    sendData = {'userid': "multiUser"}
+    response = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/accessflag', data=sendData)
+    getData = response.json()
+    userQueue = getData['result']['flagforuser']
+    userQueue.append(userid)
+    postData = {"userid": userid,
+                "flagforuser": userQueue,
+                "flagforsymptom":getData['result']['flagforsymptom'],
+                "flagfordaily":getData['result']['flagfordaily']}
+    response = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/flag', data=postData)
+    if response.status_code == 200:
+        return "OK"
+    else:
+        return "fail"
+
+
 @app.get("/basicInfo")
 def get_for_basic_info():
     userid = "Ue1350bef1851afd418a9aa81e444eaa7"
