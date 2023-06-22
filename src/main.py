@@ -31,7 +31,12 @@ def postForMultiUser(multiUser: multiUserModel):
 
 @app.get("/basicInfo")
 def get_for_basic_info():
-    userid = "Ue1350bef1851afd418a9aa81e444eaa7"
+    
+    sendData = {'userid': "multiUser"}
+    response = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/accessflag', data=sendData)
+    getData = response.json()
+    userQueue = eval(getData['result']['flagforuser'])
+    userid = userQueue[0]
 
     # Prepare the data
     data = {'userid': userid}
@@ -233,6 +238,19 @@ def post_for_isReturn(isReturn: isReturnModel):
     userid = isReturn.userID
 
     score = [int(i) for i in re.findall(r'\d+', data)]
+    ################ dequeue
+    '''
+    sendData = {'userid': "multiUser"}
+    response = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/accessflag', data=sendData)
+    getData = response.json()
+    userQueue = eval(getData['result']['flagforuser'])
+    userQueue.leftpop()
+    postData = {"userid": userid,
+                "flagforuser": userQueue,
+                "flagforsymptom":getData['result']['flagforsymptom'],
+                "flagfordaily":getData['result']['flagfordaily']}
+    response = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/flag', data=postData)
+    '''
     if score[0] > 7: 
         result = {'message':'請您立即回診',
                   'userID': userid}
