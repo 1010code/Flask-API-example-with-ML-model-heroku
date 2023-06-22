@@ -16,7 +16,7 @@ def postForMultiUser(multiUser: multiUserModel):
     sendData = {'userid': "multiUser"}
     response = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/accessflag', data=sendData)
     getData = response.json()
-    userQueue = getData['result']['flagforuser']
+    userQueue = eval(getData['result']['flagforuser'])
     userQueue.append(userid)
     postData = {"userid": userid,
                 "flagforuser": userQueue,
