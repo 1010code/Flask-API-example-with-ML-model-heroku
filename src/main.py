@@ -5,6 +5,7 @@ from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
 import requests
 import re
+import json
 
 app = FastAPI()
 
@@ -20,7 +21,7 @@ def postForMultiUser(multiUser: multiUserModel):
     userQueue.append(userid)
     print(jsonable_encoder(userQueue))
     postData = {"userid": "multiUser",
-                "flagforuser": "'"+jsonable_encoder(userQueue)+"'",
+                "flagforuser": json.dumps(userQueue),
                 "flagforsymptom":getData['result']['flagforsymptom'],
                 "flagfordaily":getData['result']['flagfordaily']}
     response = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/flag', data=postData)
@@ -240,18 +241,19 @@ def post_for_isReturn(isReturn: isReturnModel):
 
     score = [int(i) for i in re.findall(r'\d+', data)]
     ################ dequeue
-    '''
+
     sendData = {'userid': "multiUser"}
     response = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/accessflag', data=sendData)
     getData = response.json()
     userQueue = eval(getData['result']['flagforuser'])
-    userQueue.leftpop()
-    postData = {"userid": userid,
-                "flagforuser": userQueue,
+    userQueue.append(userid)
+    print(jsonable_encoder(userQueue))
+    postData = {"userid": "multiUser",
+                "flagforuser": json.dumps(userQueue),
                 "flagforsymptom":getData['result']['flagforsymptom'],
                 "flagfordaily":getData['result']['flagfordaily']}
     response = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/flag', data=postData)
-    '''
+
     if score[0] > 7: 
         result = {'message':'請您立即回診',
                   'userID': userid}
