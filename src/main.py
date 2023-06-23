@@ -18,8 +18,8 @@ def postForMultiUser(multiUser: multiUserModel):
     response = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/accessflag', data=sendData)
     getData = response.json()
     userQueue = eval(getData['result']['flagforuser'])
+
     userQueue.append(userid)
-    print(jsonable_encoder(userQueue))
     postData = {"userid": "multiUser",
                 "flagforuser": json.dumps(userQueue),
                 "flagforsymptom":getData['result']['flagforsymptom'],
@@ -242,12 +242,13 @@ def post_for_isReturn(isReturn: isReturnModel):
     score = [int(i) for i in re.findall(r'\d+', data)]
     ################ dequeue
 
+    userid = userid
     sendData = {'userid': "multiUser"}
     response = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/accessflag', data=sendData)
     getData = response.json()
     userQueue = eval(getData['result']['flagforuser'])
+
     userQueue.pop(0)
-    print(jsonable_encoder(userQueue))
     postData = {"userid": "multiUser",
                 "flagforuser": json.dumps(userQueue),
                 "flagforsymptom":getData['result']['flagforsymptom'],
