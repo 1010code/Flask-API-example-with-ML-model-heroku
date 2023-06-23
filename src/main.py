@@ -42,7 +42,7 @@ def get_for_basic_info():
 
     # Prepare the data
     data = {'userid': userid}
-
+    print(userid)
     # Send a POST request
     response = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/accessbasic', data=data)
     # Extract data from the response
@@ -56,7 +56,21 @@ def get_for_basic_info():
         "userID":userid,
         "result": user_data['result']
     }
+        ################ dequeue
 
+    userid = userid
+    sendData = {'userid': "multiUser"}
+    response = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/accessflag', data=sendData)
+    getData = response.json()
+    userQueue = eval(getData['result']['flagforuser'])
+
+    userQueue.pop(0)
+    postData = {"userid": "multiUser",
+                "flagforuser": json.dumps(userQueue),
+                "flagforsymptom":getData['result']['flagforsymptom'],
+                "flagfordaily":getData['result']['flagfordaily']}
+    response = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/flag', data=postData)
+    print(response)
             
     return jsonable_encoder(result)
 
@@ -240,21 +254,7 @@ def post_for_isReturn(isReturn: isReturnModel):
     userid = isReturn.userID
 
     score = [int(i) for i in re.findall(r'\d+', data)]
-    ################ dequeue
 
-    userid = userid
-    sendData = {'userid': "multiUser"}
-    response = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/accessflag', data=sendData)
-    getData = response.json()
-    userQueue = eval(getData['result']['flagforuser'])
-
-    userQueue.pop(0)
-    postData = {"userid": "multiUser",
-                "flagforuser": json.dumps(userQueue),
-                "flagforsymptom":getData['result']['flagforsymptom'],
-                "flagfordaily":getData['result']['flagfordaily']}
-    response = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/flag', data=postData)
-    print(response)
     if score[0] > 7: 
         result = {'message':'請您立即回診',
                   'userID': userid}
