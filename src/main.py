@@ -42,7 +42,7 @@ def get_for_basic_info():
 
     # Prepare the data
     data = {'userid': userid}
-    print(userid)
+    print("user":userid)
     # Send a POST request
     response = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/accessbasic', data=data)
     # Extract data from the response
