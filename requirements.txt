@@ -9,4 +9,3 @@ uvicorn
 uvloop
 websockets
 requests
-json
