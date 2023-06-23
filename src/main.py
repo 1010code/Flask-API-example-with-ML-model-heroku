@@ -253,7 +253,7 @@ def post_for_isReturn(isReturn: isReturnModel):
                 "flagforsymptom":getData['result']['flagforsymptom'],
                 "flagfordaily":getData['result']['flagfordaily']}
     response = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/flag', data=postData)
-
+    print(response)
     if score[0] > 7: 
         result = {'message':'請您立即回診',
                   'userID': userid}
