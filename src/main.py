@@ -259,11 +259,24 @@ def post_for_isReturn(isReturn: isReturnModel):
         result = {'message':'請您立即回診',
                   'userID': userid}
         requests.post('https://i-care-te-st-21770a966fd0.herokuapp.com/external_api', json=result)
+
+        postData = {"userid": userid,
+                    "flagforuser": "",
+                    "flagforsymptom":"2",
+                    "flagfordaily":"0"}
+        response = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/flag', data=postData)
+        print(response)
         return "1"
     else:
         result = {'message':'您的狀況良好!請繼續保持!OvO',
                   'userID': userid}
         requests.post('https://i-care-te-st-21770a966fd0.herokuapp.com/external_api', json=result)
+        postData = {"userid": userid,
+                    "flagforuser": "",
+                    "flagforsymptom":"2",
+                    "flagfordaily":"0"}
+        response = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/flag', data=postData)
+        print(response)
         return "0"
     
 
@@ -292,3 +305,39 @@ def post_for_records(data_messages: messageModel):
    
     
     return jsonable_encoder(result)
+
+
+# def deque():
+#     sendData = {'userid': "multiUser"}
+#     response = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/accessflag', data=sendData)
+#     getData = response.json()
+#     userQueue = eval(getData['result']['flagforuser'])
+
+#     userQueue.pop(0)
+#     postData = {"userid": "multiUser",
+#                 "flagforuser": json.dumps(userQueue),
+#                 "flagforsymptom":getData['result']['flagforsymptom'],
+#                 "flagfordaily":getData['result']['flagfordaily']}
+#     response = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/flag', data=postData)
+#     print(response)
+
+
+# class changeFlagModel(BaseModel):
+#     userid: str
+#     flagforuser: str
+#     flagforsymptom: str
+#     flagfordaily: str
+
+# @app.post("/changeFlag")
+# def changeFlag(flagForChange: changeFlagModel):
+#     userid = flagForChange.userid
+#     flagforuser=flagForChange.flagforuser
+#     flagforsymptom=flagForChange.flagforsymptom
+#     flagfordaily=flagForChange.flagfordaily
+
+#     postData = {"userid": userid,
+#                 "flagforuser": flagforuser,
+#                 "flagforsymptom":flagforsymptom,
+#                 "flagfordaily":flagfordaily}
+#     response = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/flag', data=postData)
+#     print(response)
