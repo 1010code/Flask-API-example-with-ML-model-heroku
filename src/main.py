@@ -8,6 +8,19 @@ import re
 import json
 
 app = FastAPI()
+def deque():
+    sendData = {'userid': "multiUser"}
+    response = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/accessflag', data=sendData)
+    getData = response.json()
+    userQueue = eval(getData['result']['flagforuser'])
+
+    userQueue.pop(0)
+    postData = {"userid": "multiUser",
+                "flagforuser": json.dumps(userQueue),
+                "flagforsymptom":getData['result']['flagforsymptom'],
+                "flagfordaily":getData['result']['flagfordaily']}
+    response = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/flag', data=postData)
+    print(response)
 
 class multiUserModel(BaseModel):
     userID: str
@@ -58,19 +71,18 @@ def get_for_basic_info():
     }
         ################ dequeue
 
-    userid = userid
-    sendData = {'userid': "multiUser"}
-    response = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/accessflag', data=sendData)
-    getData = response.json()
-    userQueue = eval(getData['result']['flagforuser'])
+    # sendData = {'userid': "multiUser"}
+    # response = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/accessflag', data=sendData)
+    # getData = response.json()
+    # userQueue = eval(getData['result']['flagforuser'])
 
-    userQueue.pop(0)
-    postData = {"userid": "multiUser",
-                "flagforuser": json.dumps(userQueue),
-                "flagforsymptom":getData['result']['flagforsymptom'],
-                "flagfordaily":getData['result']['flagfordaily']}
-    response = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/flag', data=postData)
-    print(response)
+    # userQueue.pop(0)
+    # postData = {"userid": "multiUser",
+    #             "flagforuser": json.dumps(userQueue),
+    #             "flagforsymptom":getData['result']['flagforsymptom'],
+    #             "flagfordaily":getData['result']['flagfordaily']}
+    # response = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/flag', data=postData)
+    # print(response)
             
     return jsonable_encoder(result)
 
@@ -254,6 +266,7 @@ def post_for_isReturn(isReturn: isReturnModel):
     userid = isReturn.userID
 
     score = [int(i) for i in re.findall(r'\d+', data)]
+    deque()
 
     if score[0] > 7: 
         result = {'message':'請您立即回診',
@@ -307,19 +320,7 @@ def post_for_records(data_messages: messageModel):
     return jsonable_encoder(result)
 
 
-# def deque():
-#     sendData = {'userid': "multiUser"}
-#     response = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/accessflag', data=sendData)
-#     getData = response.json()
-#     userQueue = eval(getData['result']['flagforuser'])
 
-#     userQueue.pop(0)
-#     postData = {"userid": "multiUser",
-#                 "flagforuser": json.dumps(userQueue),
-#                 "flagforsymptom":getData['result']['flagforsymptom'],
-#                 "flagfordaily":getData['result']['flagfordaily']}
-#     response = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/flag', data=postData)
-#     print(response)
 
 
 # class changeFlagModel(BaseModel):
