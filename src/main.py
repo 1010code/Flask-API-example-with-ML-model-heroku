@@ -8,13 +8,13 @@ import re
 import json
 
 app = FastAPI()
-def deque():
+def deque(userid):
     sendData = {'userid': "multiUser"}
     response = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/accessflag', data=sendData)
     getData = response.json()
     userQueue = eval(getData['result']['flagforuser'])
 
-    userQueue.pop(0)
+    userQueue.remove(userid)
     postData = {"userid": "multiUser",
                 "flagforuser": json.dumps(userQueue),
                 "flagforsymptom":getData['result']['flagforsymptom'],
@@ -266,7 +266,7 @@ def post_for_isReturn(isReturn: isReturnModel):
     userid = isReturn.userID
 
     score = [int(i) for i in re.findall(r'\d+', data)]
-    deque()
+    deque(userid)
 
     if score[0] > 7: 
         result = {'message':'請您立即回診',
