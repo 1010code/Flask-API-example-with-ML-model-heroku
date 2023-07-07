@@ -69,6 +69,8 @@ def get_for_basic_info():
         "userID":userid,
         "result": user_data['result']
     }
+
+    deque(userid)
         ################ dequeue
 
     # sendData = {'userid': "multiUser"}
@@ -266,7 +268,7 @@ def post_for_isReturn(isReturn: isReturnModel):
     userid = isReturn.userID
 
     score = [int(i) for i in re.findall(r'\d+', data)]
-    deque(userid)
+    # deque(userid)
 
     if score[0] > 7: 
         result = {'message':'請您立即回診',
