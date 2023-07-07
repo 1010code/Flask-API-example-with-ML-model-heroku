@@ -120,24 +120,24 @@ def post_for_symptoms(symptoms: SymptomsModel):
     
     # Prepare the data
     data2 = {
-        'userid': userid,
-        "urineprotein": "-",
-        "urineob": "-",
-        "urineglucose": "-",
-        "bloodhb": "15",
-        "bloodht": "45",
-        "bloodplt": "30",
-        "bloodpressure": "73-124",
-        "bloodrbc": "500",
-        "bloodwbc": "5500 %",
-        "cholesterol": "150",
-        "hbeag": "-",
-        "hbsab": "-",
-        "hbsag": "-",
-        "kidneybun": "15",
-        "liversgot": "25",
-        "liversgpt": "30",
-        "kidneycre": "0.7"
+    'userid': userid,
+    "urineprotein": "- ",
+    "urineob": "-",
+    "urineglucose": "-",
+    "bloodhb": "15 g/dL",
+    "bloodht": "45 %",
+    "bloodplt": "120 x 10^3/µL",
+    "bloodpressure": "舒張壓:89 mmHg, 收縮壓:132 mmHg",
+    "bloodrbc": "500 x 10^6/µL",
+    "bloodwbc": "12.3 x 10^3/µL",
+    "cholesterol": "150 mg/dL",
+    "hbeag": "-",
+    "hbsab": "-",
+    "hbsag": "-",
+    "kidneybun": "15 mg/dL",
+    "liversgot": "25 U/L",
+    "liversgpt": "30 U/L",
+    "kidneycre": "0.7 mg/dL"
     }
     # Send a POST request
     response = requests.post('https://us-central1-fortesting-c54ba.cloudfunctions.net/post/testinfo', data=data2)
